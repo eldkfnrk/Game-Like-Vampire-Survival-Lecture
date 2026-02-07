@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -6,32 +7,38 @@ public class Player : MonoBehaviour
     public float moveSpeed;
 
     Rigidbody2D rigid;
+    SpriteRenderer spriteR;
 
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+        spriteR = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        inputVec.x = Input.GetAxisRaw("Horizontal");
-        inputVec.y = Input.GetAxisRaw("Vertical");
+        //inputVec.x = Input.GetAxisRaw("Horizontal");
+        //inputVec.y = Input.GetAxisRaw("Vertical");
+    }
+
+    private void LateUpdate()
+    {
+        if (inputVec.x != 0)
+        {
+            spriteR.flipX = inputVec.x < 0;
+        }
     }
 
     void FixedUpdate()
     {
-        Vector2 nextVec = inputVec.normalized * moveSpeed * Time.fixedDeltaTime;
+        //Vector2 nextVec = inputVec.normalized * moveSpeed * Time.fixedDeltaTime;
+        Vector2 nextVec = inputVec * moveSpeed * Time.fixedDeltaTime;  //InputSystem에서 normalized를 하도록 설정했기 때문에 normalized를 하지 않아도 된다. 
 
-        // 물리를 이용한 이동 방법 3가지
-        // 1. 힘을 주는 방법
-        //rigid.AddForce(inputVec);
-
-        // 2. 속도를 조절하는 방법
-        //rigid.linearVelocity = inputVec;
-
-        // 3. 위치를 직접 조정하는 방법(이번 프로젝트에서 사용할 방법)
-        //rigid.MovePosition(rigid.position + inputVec);
-        
         rigid.MovePosition(rigid.position + nextVec);
+    }
+
+    void OnMove(InputValue value)
+    {
+        inputVec = value.Get<Vector2>();
     }
 }
