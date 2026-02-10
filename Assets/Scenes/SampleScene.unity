@@ -18083,6 +18083,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3364cbd006ee0b244ae0ecf49f39a911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Reposition
+--- !u!1 &2131004601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2131004603}
+  - component: {fileID: 2131004602}
+  m_Layer: 0
+  m_Name: PoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2131004602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131004601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 653e71673eeb1854eb8bb4868e8121fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PoolManager
+  enemyPrefabs:
+  - {fileID: 8982758746303995549, guid: 0a99249e6378dd840a15c311e09227eb, type: 3}
+  - {fileID: 6300035362807298912, guid: a44ac9bb3495b3141948c450aed22c91, type: 3}
+  - {fileID: 7169476795318433215, guid: 3a0a927132f2bcb4a936add0821225d4, type: 3}
+  - {fileID: 3157387734739247767, guid: eeab16308040dce478b41af926a449f4, type: 3}
+  - {fileID: 6088864376412741229, guid: a977967f2571ccc4fa539ea4e46c8bd9, type: 3}
+--- !u!4 &2131004603
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131004601}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -18091,5 +18141,6 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 1426671307}
+  - {fileID: 2131004603}
   - {fileID: 273879930}
   - {fileID: 835563704}
