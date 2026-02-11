@@ -3,7 +3,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float moveSpeed;
-    public Rigidbody2D target;
+    Rigidbody2D target;
 
     bool isLive;
 
@@ -26,5 +26,10 @@ public class Enemy : MonoBehaviour
         Vector2 dir = target.position - rigid.position;
         Vector2 moveVec = dir.normalized * moveSpeed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + moveVec);
+    }
+
+    private void OnEnable()
+    {
+        target = GameManager.instance.player.GetComponent<Rigidbody2D>();
     }
 }

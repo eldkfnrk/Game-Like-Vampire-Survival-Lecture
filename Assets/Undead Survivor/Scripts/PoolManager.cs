@@ -16,8 +16,28 @@ public class PoolManager : MonoBehaviour
         {
             enemyPools[index] = new List<GameObject>();
         }
+    }
 
-        string log = string.Format("{0}, {1}", enemyPrefabs.Length, enemyPools.Length);
-        Debug.Log(log);
+    public GameObject GetObject(int index)
+    {
+        GameObject selectObject = null;
+
+        foreach(GameObject gameObject in enemyPools[index])
+        {
+            if (!gameObject.activeSelf)
+            {
+                selectObject = gameObject;
+                selectObject.SetActive(true);
+                break;
+            }
+        }
+
+        if (!selectObject)  //변수에 데이터가 없으면 false 있으면 true를 반환해준다.(객체 같은 null 값을 가지는 기본 자료형이 아닌 변수)
+        {
+            selectObject = Instantiate(enemyPrefabs[index], transform);
+            enemyPools[index].Add(selectObject);
+        }
+
+        return selectObject;
     }
 }
