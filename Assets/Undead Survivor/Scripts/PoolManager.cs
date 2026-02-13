@@ -32,7 +32,7 @@ public class PoolManager : MonoBehaviour
             }
         }
 
-        if (!selectObject)  //변수에 데이터가 없으면 false 있으면 true를 반환해준다.(객체 같은 null 값을 가지는 기본 자료형이 아닌 변수)
+        if (!selectObject)
         {
             selectObject = Instantiate(enemyPrefabs[index], transform);
             enemyPools[index].Add(selectObject);

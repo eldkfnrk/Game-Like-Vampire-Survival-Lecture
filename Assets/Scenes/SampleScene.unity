@@ -13895,6 +13895,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99143f133acf48f45be1f5fd7a901598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  gameTime: 0
+  maxGameTime: 0
   poolManager: {fileID: 2131004602}
   player: {fileID: 273879931}
 --- !u!4 &1426671307
@@ -18455,6 +18457,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a86e47d95b515954681755c6ed069f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spawner
+  spawnDatas:
+  - spriteType: 0
+    spawnTime: 2
+    hp: 10
+    moveSpeed: 1.2
+  - spriteType: 1
+    spawnTime: 1.7
+    hp: 22
+    moveSpeed: 1.4
+  - spriteType: 2
+    spawnTime: 1.4
+    hp: 35
+    moveSpeed: 1.9
+  - spriteType: 3
+    spawnTime: 1.2
+    hp: 51
+    moveSpeed: 2.1
+  - spriteType: 4
+    spawnTime: 1
+    hp: 76
+    moveSpeed: 2.3
 --- !u!1 &1767539162
 GameObject:
   m_ObjectHideFlags: 0
@@ -18641,10 +18664,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PoolManager
   enemyPrefabs:
   - {fileID: 8982758746303995549, guid: 0a99249e6378dd840a15c311e09227eb, type: 3}
-  - {fileID: 6300035362807298912, guid: a44ac9bb3495b3141948c450aed22c91, type: 3}
-  - {fileID: 7169476795318433215, guid: 3a0a927132f2bcb4a936add0821225d4, type: 3}
-  - {fileID: 3157387734739247767, guid: eeab16308040dce478b41af926a449f4, type: 3}
-  - {fileID: 6088864376412741229, guid: a977967f2571ccc4fa539ea4e46c8bd9, type: 3}
 --- !u!4 &2131004603
 Transform:
   m_ObjectHideFlags: 0

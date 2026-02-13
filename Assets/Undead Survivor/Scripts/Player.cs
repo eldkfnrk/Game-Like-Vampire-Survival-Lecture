@@ -19,8 +19,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        //inputVec.x = Input.GetAxisRaw("Horizontal");
-        //inputVec.y = Input.GetAxisRaw("Vertical");
+
     }
 
     private void LateUpdate()
@@ -35,8 +34,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Vector2 nextVec = inputVec.normalized * moveSpeed * Time.fixedDeltaTime;
-        Vector2 nextVec = inputVec * moveSpeed * Time.fixedDeltaTime;  //InputSystem에서 normalized를 하도록 설정했기 때문에 normalized를 하지 않아도 된다. 
+        Vector2 nextVec = inputVec * moveSpeed * Time.fixedDeltaTime;
 
         rigid.MovePosition(rigid.position + nextVec);
     }
