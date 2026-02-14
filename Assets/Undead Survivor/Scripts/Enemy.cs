@@ -41,11 +41,36 @@ public class Enemy : MonoBehaviour
         curHP = maxHP;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Bullet"))
+            return;
+
+        curHP -= collision.GetComponent<Bullet>().damage;
+
+        if (curHP > 0)
+        {
+            // alive, hit animation
+            
+        }
+        else
+        {
+            // death, deate animation
+            Death();
+        }
+    }
+
     public void EnemyInit(SpawnData data)
     {
         animator.runtimeAnimatorController = animController[data.spriteType];
         maxHP = data.hp;
         moveSpeed = data.moveSpeed;
         curHP = maxHP;
+    }
+
+    void Death()
+    {
+        isLive = false;
+        gameObject.SetActive(false);
     }
 }

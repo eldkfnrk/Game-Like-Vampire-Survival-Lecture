@@ -4610,6 +4610,7 @@ Transform:
   - {fileID: 1462943013}
   - {fileID: 1153311792}
   - {fileID: 1751137057}
+  - {fileID: 2131494144}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &273879931
@@ -18662,8 +18663,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653e71673eeb1854eb8bb4868e8121fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PoolManager
-  enemyPrefabs:
+  prefabs:
   - {fileID: 8982758746303995549, guid: 0a99249e6378dd840a15c311e09227eb, type: 3}
+  - {fileID: 3232984714891156939, guid: 01683b51626f444499635c4a593fc9ad, type: 3}
 --- !u!4 &2131004603
 Transform:
   m_ObjectHideFlags: 0
@@ -18679,6 +18681,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2131494143
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2131494144}
+  - component: {fileID: 2131494145}
+  m_Layer: 0
+  m_Name: Weapon 0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2131494144
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131494143}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 273879930}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2131494145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131494143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73a9eb8424f30504c8e2dd1389d2ef73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Weapon
+  weaponId: 0
+  prefabId: 1
+  damage: 11
+  rotateSpeed: 0
+  count: 2
 --- !u!1 &2139385851
 GameObject:
   m_ObjectHideFlags: 0

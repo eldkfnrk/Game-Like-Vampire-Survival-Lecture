@@ -5,12 +5,12 @@ using UnityEngine.UIElements;
 
 public class PoolManager : MonoBehaviour
 {
-    public GameObject[] enemyPrefabs;
+    public GameObject[] prefabs;
     List<GameObject>[] enemyPools;
 
     private void Awake()
     {
-        enemyPools = new List<GameObject>[enemyPrefabs.Length];
+        enemyPools = new List<GameObject>[prefabs.Length];
 
         for(int index = 0; index < enemyPools.Length; index++)
         {
@@ -34,7 +34,7 @@ public class PoolManager : MonoBehaviour
 
         if (!selectObject)
         {
-            selectObject = Instantiate(enemyPrefabs[index], transform);
+            selectObject = Instantiate(prefabs[index], transform);
             enemyPools[index].Add(selectObject);
         }
 
