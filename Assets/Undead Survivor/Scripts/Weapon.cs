@@ -6,8 +6,16 @@ public class Weapon : MonoBehaviour
     public int weaponId;
     public int prefabId;
     public float damage;
-    public int rotateSpeed;
+    public float rotateSpeed;
     public int count;
+
+    float timer;
+    Player player;
+
+    private void Awake()
+    {
+        player = GetComponentInParent<Player>();
+    }
 
     void Start()
     {
@@ -22,6 +30,13 @@ public class Weapon : MonoBehaviour
                 transform.Rotate(Vector3.back * rotateSpeed * Time.deltaTime);  //Vector3.back은 z축 -1의 값을 가지는데 시계 방향으로 회전하는 것은 -이기 때문이고 반시계 방향은 +이기 때문에 반시계 방향을 원하면 Vector3.forward를 사용하여도 된다.
                 break;
             default:
+                timer += Time.deltaTime;
+
+                if(timer > rotateSpeed)  //원거리 발사체의 경우 rotateSpeed 변수가 회전 속도가 아닌 발사 속도로 볼 것이다.
+                {
+                    timer = 0f;
+                    Fire();
+                }
                 break;
         }
 
@@ -44,10 +59,11 @@ public class Weapon : MonoBehaviour
         switch (weaponId)
         {
             case 0:
-                rotateSpeed = 150;
+                rotateSpeed = 150f;
                 WeaponPosition();
                 break;
             default:
+                rotateSpeed = 0.45f;
                 break;
         }
     }
@@ -78,5 +94,15 @@ public class Weapon : MonoBehaviour
 
             weaponTr.GetComponent<Bullet>().BulletInit(damage, -1);  // -1 is Infinitly per.(-1은 무한으로 관통한다는 의미)
         }
+    }
+
+    void Fire()
+    {
+        //객체 값이 있으면 true 없으면 false이기 때문에 null값인지 확인하기 위해서는 !를 붙여야 한다.
+        if (!player.scanner.nearestTarget)
+            return;
+
+        Transform bullet = GameManager.instance.poolManager.GetObject(prefabId).transform;
+        bullet.position = transform.position;
     }
 }

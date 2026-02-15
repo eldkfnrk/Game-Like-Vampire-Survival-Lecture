@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7460548565807314472}
   - component: {fileID: 1745504850288824126}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 5476054153532956282}
   - component: {fileID: 5279725831977584873}
   - component: {fileID: 8928471100445892000}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'Enemy '
   m_TagString: Enemy
   m_Icon: {fileID: 0}

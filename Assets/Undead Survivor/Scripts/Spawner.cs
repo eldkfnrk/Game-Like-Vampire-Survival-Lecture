@@ -18,16 +18,6 @@ public class Spawner : MonoBehaviour
     {
         timer += Time.deltaTime;
         level = Mathf.Min(Mathf.FloorToInt(GameManager.instance.gameTime / 10f), spawnDatas.Length - 1);
-        //Mathf.CeilToInt - 실수형 데이터의 소수점 부분을 올림 처리하고 정수형 데이터 값으로 변환해주는 Mathf 함수
-        //Mathf.FloorToInt - 실수형 데이터의 소수점 부분을 버림 처리하고 정수형 데이터 값으로 변환해주는 Mathf 함수 
-        //Mathf.Min - 첫 번째 인자 값이 두 번째 인자 값보다 커지면 두 번째 인자 값을 반환하고 아니면 첫 번째 인자 값을 반환하는 Mathf 함수
-        //위에서 Mathf.Min 함수를 사용한 이유는 무한으로 커지는 시간 값으로 인한 인덱스 오류가 발생할 수 있는 것을 방지하기 위해서이다.
-
-        //if (timer > 1f)
-        //{
-        //    Spawn();
-        //    timer = 0f;
-        //}
 
         if (timer > spawnDatas[level].spawnTime)
         {
