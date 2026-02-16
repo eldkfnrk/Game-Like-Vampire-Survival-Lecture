@@ -102,7 +102,15 @@ public class Weapon : MonoBehaviour
         if (!player.scanner.nearestTarget)
             return;
 
+        Vector3 targetPos = player.scanner.nearestTarget.position;
+        Vector3 direction = targetPos - transform.position;
+        direction = direction.normalized;
+
         Transform bullet = GameManager.instance.poolManager.GetObject(prefabId).transform;
         bullet.position = transform.position;
+        bullet.rotation = Quaternion.FromToRotation(Vector3.up, direction);
+        bullet.parent = transform;
+
+        bullet.GetComponent<Bullet>().BulletInit(damage, count, direction);  //count는 근거리 무기에서는 무기 개수였지만 원거리 총알에서는 관통력으로 사용
     }
 }
