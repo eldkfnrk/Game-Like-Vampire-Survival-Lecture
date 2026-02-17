@@ -98,7 +98,6 @@ public class Weapon : MonoBehaviour
 
     void Fire()
     {
-        //객체 값이 있으면 true 없으면 false이기 때문에 null값인지 확인하기 위해서는 !를 붙여야 한다.
         if (!player.scanner.nearestTarget)
             return;
 

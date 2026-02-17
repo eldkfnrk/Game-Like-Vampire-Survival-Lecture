@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     Rigidbody2D rigid;
     Animator animator;
     SpriteRenderer spriteR;
+    Collider2D coll;
     WaitForFixedUpdate wait;  //WaitForFixedUpdate - 한 물리 업데이트를 넘긴다는 의미
 
     private void Awake()
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteR = GetComponent<SpriteRenderer>();
+        coll = GetComponent<Collider2D>();
         wait = new WaitForFixedUpdate();
     }
 
@@ -40,7 +42,7 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
+        if (!isLive || animator.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
             return;
 
         Vector2 dir = target.position - rigid.position;
@@ -52,6 +54,10 @@ public class Enemy : MonoBehaviour
     {
         target = GameManager.instance.player.GetComponent<Rigidbody2D>();
         isLive = true;
+        coll.enabled = true;
+        rigid.simulated = true;
+        spriteR.sortingOrder = 2;
+        animator.SetBool("Dead", isLive);
         curHP = maxHP;
     }
 
@@ -71,7 +77,12 @@ public class Enemy : MonoBehaviour
         else
         {
             // death, deate animation
-            Death();
+            isLive = false;
+            coll.enabled = false;
+            rigid.simulated = false;
+            spriteR.sortingOrder = 1;
+            animator.SetBool("Dead", isLive);
+            //Death();  //애니메이션 이벤트로 직접 하는 것이 아닌 애니메이션이 오브젝트 비활성화를 수행
         }
     }
 
@@ -85,7 +96,6 @@ public class Enemy : MonoBehaviour
 
     void Death()
     {
-        isLive = false;
         gameObject.SetActive(false);
     }
 }
