@@ -57,13 +57,13 @@ public class Enemy : MonoBehaviour
         coll.enabled = true;
         rigid.simulated = true;
         spriteR.sortingOrder = 2;
-        animator.SetBool("Dead", isLive);
+        animator.SetBool("Dead", false);
         curHP = maxHP;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Bullet"))
+        if (!collision.CompareTag("Bullet") || !isLive)
             return;
 
         curHP -= collision.GetComponent<Bullet>().damage;
@@ -81,7 +81,9 @@ public class Enemy : MonoBehaviour
             coll.enabled = false;
             rigid.simulated = false;
             spriteR.sortingOrder = 1;
-            animator.SetBool("Dead", isLive);
+            animator.SetBool("Dead", true);
+            GameManager.instance.kill++;
+            GameManager.instance.GetExp();
             //Death();  //애니메이션 이벤트로 직접 하는 것이 아닌 애니메이션이 오브젝트 비활성화를 수행
         }
     }
