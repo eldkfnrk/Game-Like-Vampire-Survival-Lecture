@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
         else
             Destroy(this);
 
-        maxGameTime = 5 * 10f;
+        maxGameTime *= 60f;
     }
 
     private void Update()
