@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public float maxGameTime;
 
     [Header("Player Info")]
+    public int HP;
+    public int maxHP;
     public int level;
     public int kill;
     public int exp;
@@ -26,6 +28,12 @@ public class GameManager : MonoBehaviour
             Destroy(this);
 
         maxGameTime *= 60f;
+        maxHP = 100;
+    }
+
+    private void Start()
+    {
+        HP = maxHP;
     }
 
     private void Update()
