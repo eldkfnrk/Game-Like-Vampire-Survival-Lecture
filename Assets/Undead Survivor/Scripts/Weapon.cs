@@ -14,12 +14,8 @@ public class Weapon : MonoBehaviour
 
     private void Awake()
     {
-        player = GetComponentInParent<Player>();
-    }
-
-    void Start()
-    {
-        WeaponInit();
+        //player = GetComponentInParent<Player>();
+        player = GameManager.instance.player;
     }
 
     void Update()
@@ -40,22 +36,29 @@ public class Weapon : MonoBehaviour
                 break;
         }
 
-        // test code
-        if (Input.GetButtonDown("Jump"))
+    }
+
+    public void WeaponInit(ItemData data)
+    {
+        // Basic Set
+        name = string.Format("Weapon {0}", data.itemId);
+        transform.parent = player.transform;
+        transform.localPosition = Vector3.zero;
+
+        //Property Set
+        weaponId = data.itemId;
+        damage = data.baseDamage;
+        count = data.baseCount;
+
+        for (int i = 0; i < GameManager.instance.poolManager.prefabs.Length; i++)
         {
-            LevelUp(3.5f, 2);
-            WeaponInit();
+            if(data.projectile == GameManager.instance.poolManager.prefabs[i])
+            {
+                prefabId = i;
+                break;
+            }
         }
-    }
 
-    public void LevelUp(float increaseDamage, int addCount)
-    {
-        damage += increaseDamage;
-        count += addCount;
-    }
-
-    public void WeaponInit()
-    {
         switch (weaponId)
         {
             case 0:
