@@ -6,6 +6,7 @@ public class Item : MonoBehaviour
     public ItemData itemData;
     public int level;
     public Weapon weapon;
+    public Gear gear;
 
     Image itemIcon;
     Text levelText;
@@ -27,7 +28,6 @@ public class Item : MonoBehaviour
     {
         switch (itemData.itemType)
         {
-            //이렇게 두 조건을 함께 쓰는 것도 가능(이 경우는 ||와 같다.)
             case ItemData.ItemType.Melee:
             case ItemData.ItemType.Range:
                 if(level == 0)
@@ -36,12 +36,37 @@ public class Item : MonoBehaviour
                     weapon = newWeapon.AddComponent<Weapon>();
                     weapon.WeaponInit(itemData);
                 }
+                else
+                {
+                    // 레벨 업 시 데미지 및 관통력 증가
+                    // 기본 데미지와 관통력에 정의된 레벨 당 증가율을 적용
+                    // 무기의 레벨 업을 담당하는 함수 호출로 증가된 값을 게임에 적용
+                    float nextDamage = itemData.baseDamage;
+                    int nextCount = itemData.baseCount;
+
+                    nextDamage += itemData.baseDamage * itemData.damages[level];
+                    nextCount = itemData.counts[level];
+
+                    weapon.LevelUp(nextDamage, nextCount);
+                }
                 break;
             case ItemData.ItemType.Glove:
-
-                break;
             case ItemData.ItemType.Shoe:
+                if (level == 0)
+                {
+                    // 장비도 무기와 마찬가지로 0레벨에서 1레벨로 올라갈 때 생성된다.
+                    GameObject newGear = new GameObject();
+                    gear = newGear.AddComponent<Gear>();
+                    gear.GearInit(itemData);
+                }
+                else
+                {
+                    // 레벨 업 시 적용 값 변경
+                    // 기본 비율 적용
+                    float nextRate = itemData.damages[level];
 
+                    gear.LevelUp(nextRate);
+                }
                 break;
             case ItemData.ItemType.Potion:
 
@@ -50,7 +75,7 @@ public class Item : MonoBehaviour
 
         level++;
 
-        if(level > itemData.damages.Length)
+        if(level == itemData.damages.Length)
         {
             //이때 버튼 오작동 방지를 위해서 버튼의 Navigation 속성은 None으로 설정
             GetComponent<Button>().interactable = false;

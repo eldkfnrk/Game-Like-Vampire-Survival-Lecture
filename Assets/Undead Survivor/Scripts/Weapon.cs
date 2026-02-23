@@ -66,7 +66,7 @@ public class Weapon : MonoBehaviour
                 WeaponPosition();
                 break;
             default:
-                rotateSpeed = 0.45f;
+                rotateSpeed = 0.6f;
                 break;
         }
     }
@@ -114,5 +114,16 @@ public class Weapon : MonoBehaviour
         bullet.parent = transform;
 
         bullet.GetComponent<Bullet>().BulletInit(damage, count, direction);  //count는 근거리 무기에서는 무기 개수였지만 원거리 총알에서는 관통력으로 사용
+    }
+
+    public void LevelUp(float damage, int count)
+    {
+        // 데미지는 상승률을 적용한 값을 받고 관통력은 추가 값을 받는 형식
+        this.damage = damage;
+        this.count += count;
+
+        // 근접 무기의 경우 무기 재배치
+        if (weaponId == 0)
+            WeaponPosition();
     }
 }
