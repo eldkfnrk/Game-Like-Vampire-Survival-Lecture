@@ -66,6 +66,6 @@ public class Gear : MonoBehaviour
     void SpeedUp()
     {
         float speed = 3f;  // 플레이어의 기본 이동 속력
-        GameManager.instance.player.moveSpeed += speed + speed * rate;  // 속도 상승 또한 중첩이 아닌 레벨에 대응하는 값 적용
+        GameManager.instance.player.moveSpeed += speed * rate;  // 속도 상승 또한 중첩이 아닌 레벨에 대응하는 값 적용
     }
 }

@@ -69,6 +69,9 @@ public class Weapon : MonoBehaviour
                 rotateSpeed = 0.6f;
                 break;
         }
+
+        // 이미 레벨 업한 기어의 변경 값을 적용하기 위해 변경 값 적용 함수를 실행시켜야 한다.
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
 
     void WeaponPosition()
@@ -125,5 +128,8 @@ public class Weapon : MonoBehaviour
         // 근접 무기의 경우 무기 재배치
         if (weaponId == 0)
             WeaponPosition();
+
+        // 무기가 레벨 업을 한 값에 기어의 적용 값을 적용시켜야 하기 때문에 변경 값 적용 함수를 실행시켜야 한다.
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
 }
