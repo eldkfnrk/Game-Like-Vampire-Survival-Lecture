@@ -27,4 +27,5 @@ public class ItemData : ScriptableObject
 
     [Header("Weapon")]
     public GameObject projectile;  //이 아이템의 프리팹(projectile - 발사체)
+    public Sprite hand;
 }

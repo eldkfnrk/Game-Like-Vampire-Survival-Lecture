@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     public float moveSpeed;
 
     public Scanner scanner;
+    public HandControl[] handControls;
+
     Rigidbody2D rigid;
     SpriteRenderer spriteR;
     Animator anim;
@@ -17,6 +19,7 @@ public class Player : MonoBehaviour
         spriteR = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         scanner = GetComponent<Scanner>();
+        handControls = GetComponentsInChildren<HandControl>(true);  // 인자 값으로 bool 타입 값을 넣을 수 있는데 이 매개 변수는 비활성화되어 있는 오브젝트도 포함할 것이냐를 선택하는 값이다.(true면 비활성화 오브젝트도 포함 false면 포함x)
     }
 
     void Update()

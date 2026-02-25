@@ -70,6 +70,11 @@ public class Weapon : MonoBehaviour
                 break;
         }
 
+        // Hand Control set - 알맞는 무기를 든 손에 대한 정보 초기화(알맞는 손의 HandControl 스크립트를 가지고 와서 이 스크립트를 가진 손의 스프라이트를 저장 및 적용하고 손을 활성화)
+        HandControl hand = player.handControls[(int)data.itemType];  // 열거형은 기본적으로는 정수형 값을 가진다. 그러나 타입은 열거형 타입을 가지기 때문에 정수로 쓰려면 이렇게 강제 형 변환 등을 이용한 형 변환이 필요하다.
+        hand.spriteR.sprite = data.hand;
+        hand.gameObject.SetActive(true);
+
         // 이미 레벨 업한 기어의 변경 값을 적용하기 위해 변경 값 적용 함수를 실행시켜야 한다.
         player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
