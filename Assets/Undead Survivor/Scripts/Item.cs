@@ -10,19 +10,46 @@ public class Item : MonoBehaviour
 
     Image itemIcon;
     Text levelText;
+    Text nameText;
+    Text descriptionText;
 
     private void Awake()
     {
         itemIcon = GetComponentsInChildren<Image>()[1];
         itemIcon.sprite = itemData.itemIcon;
         Text[] texts = GetComponentsInChildren<Text>();
+        // GetComponentsInChildren로 저장하는 순서는 하이라키 창의 오브젝트 순서로 정해지기 때문에 원하는 결과 값을 적절하게 변수에 담는 것이 가능하다.
         levelText = texts[0];
+        nameText = texts[1];
+        descriptionText = texts[2];
     }
 
-    private void LateUpdate()
+    private void OnEnable()
     {
         levelText.text = string.Format("Lv.{0}", level);
+        nameText.text = itemData.itemName;
+        switch (itemData.itemType)
+        {
+            case ItemData.ItemType.Melee:
+            case ItemData.ItemType.Range:
+                descriptionText.text = string.Format(itemData.itemDescription, itemData.damages[level] * 100f, itemData.counts[level]);
+                break;
+            case ItemData.ItemType.Glove:
+            case ItemData.ItemType.Shoe:
+                descriptionText.text = string.Format(itemData.itemDescription, itemData.damages[level] * 100f);
+                break;
+            case ItemData.ItemType.Potion:
+                descriptionText.text = string.Format(itemData.itemDescription);
+                break;
+        }
+
+        if (level == itemData.damages.Length)
+        {
+            //이때 버튼 오작동 방지를 위해서 버튼의 Navigation 속성은 None으로 설정
+            GetComponent<Button>().interactable = false;
+        }
     }
+
 
     public void OnClick()
     {
