@@ -20,6 +20,9 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.instance.isGameStop)
+            return;
+
         switch (weaponId)
         {
             case 0:

@@ -29,6 +29,9 @@ public class Player : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (GameManager.instance.isGameStop)
+            return;
+
         anim.SetFloat("Speed", inputVec.magnitude);
 
         if (inputVec.x != 0)
@@ -39,6 +42,9 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (GameManager.instance.isGameStop)
+            return;
+
         Vector2 nextVec = inputVec * moveSpeed * Time.fixedDeltaTime;
 
         rigid.MovePosition(rigid.position + nextVec);

@@ -9,6 +9,9 @@ public class Scanner : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameManager.instance.isGameStop)
+            return;
+
         targetsInRange = Physics2D.CircleCastAll(transform.position, scanRange, Vector2.zero, 0f, targetLayer);
         nearestTarget = GetNearestTarget();
     }

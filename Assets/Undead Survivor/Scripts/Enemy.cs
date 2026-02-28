@@ -37,11 +37,17 @@ public class Enemy : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (GameManager.instance.isGameStop)
+            return;
+
         spriteR.flipX = target.position.x < rigid.position.x;
     }
 
     private void FixedUpdate()
     {
+        if (GameManager.instance.isGameStop)
+            return;
+
         if (!isLive || animator.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
             return;
 

@@ -22,6 +22,9 @@ public class HandControl : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (GameManager.instance.isGameStop)
+            return;
+
         bool isReverse = playerSpriteR.flipX;  // 반전 상황인지 구분
 
         // 모든 transform 관련 동작은 반드시 local에서 진행하여야 한다.(부모를 기준으로 움직여야 하기 때문이다.)
