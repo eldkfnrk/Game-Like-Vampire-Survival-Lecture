@@ -19,7 +19,7 @@ public class Reposition : MonoBehaviour
         float dirX = playerPos.x - myPos.x;
         float dirY = playerPos.y - myPos.y;
 
-        float diffX = Mathf.Abs(dirX);
+        float diffX = Mathf.Abs(dirX) - 10;
         float diffY = Mathf.Abs(dirY);
 
         dirX = dirX < 0 ? -1 : 1;
@@ -31,7 +31,7 @@ public class Reposition : MonoBehaviour
         {
             case "Ground":
                 if (diffX > diffY)
-                    transform.Translate(Vector3.right * dirX * 40);
+                    transform.Translate(Vector3.right * dirX * 60);
                 else if(diffX < diffY)
                     transform.Translate(Vector3.up * dirY * 40);  
                 break;

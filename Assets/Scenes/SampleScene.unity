@@ -16588,6 +16588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99143f133acf48f45be1f5fd7a901598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  isGameStop: 0
   gameTime: 0
   maxGameTime: 10
   HP: 0
@@ -16890,7 +16891,7 @@ RectTransform:
   m_GameObject: {fileID: 1499735307}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 396400253}

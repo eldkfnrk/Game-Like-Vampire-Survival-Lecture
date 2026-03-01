@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,8 +12,8 @@ public class GameManager : MonoBehaviour
     public float maxGameTime;
 
     [Header("Player Info")]
-    public int HP;
-    public int maxHP;
+    public float HP;
+    public float maxHP;
     public int level;
     public int kill;
     public int exp;
@@ -21,6 +23,7 @@ public class GameManager : MonoBehaviour
     public PoolManager poolManager;
     public Player player;
     public LevelUp levelUpUI;
+    public GameObject resultUI;
     
     private void Awake()
     {
@@ -29,12 +32,14 @@ public class GameManager : MonoBehaviour
         else
             Destroy(this);
 
+        isGameStop = true;
         maxGameTime *= 60f;
         maxHP = 100;
     }
 
-    private void Start()
+    public void GameStart()
     {
+        isGameStop = false;
         HP = maxHP;
 
         // 임시 스크립트(게임 시작 시 플레이어가 근접 무기를 들고 있을 수 있도록 설정)
@@ -43,6 +48,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.instance.isGameStop)
+            return;
+
         gameTime += Time.deltaTime;
 
         if (gameTime > maxGameTime)
@@ -74,5 +82,22 @@ public class GameManager : MonoBehaviour
     {
         isGameStop = false;
         Time.timeScale = 1f;
+    }
+
+    public void GameRetry()
+    {
+        SceneManager.LoadScene(0);  // 씬을 다시 호출하여서 씬을 초기화하는 방식으로 재시작 구현
+    }
+
+    public void GameOver()
+    {
+        StartCoroutine(GameOverRoutine());
+    }
+
+    IEnumerator GameOverRoutine()
+    {
+        yield return new WaitForSeconds(0.3f);
+        GameStop();
+        resultUI.SetActive(true);
     }
 }
