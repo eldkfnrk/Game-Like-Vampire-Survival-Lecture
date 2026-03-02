@@ -72,9 +72,9 @@ public class Player : MonoBehaviour
             }
 
             animator.SetTrigger("Dead");
-            spriteR.sortingOrder = 3;
+            spriteR.sortingOrder = 1;
 
-            GameManager.instance.resultUI
+            GameManager.instance.GameOver();
         }
     }
 }

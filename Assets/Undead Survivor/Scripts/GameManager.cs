@@ -23,7 +23,8 @@ public class GameManager : MonoBehaviour
     public PoolManager poolManager;
     public Player player;
     public LevelUp levelUpUI;
-    public GameObject resultUI;
+    public Result resultUI;
+    public GameObject enemyCleaner;  // 게임 시간이 지나 승리하게 되면 모든 적을 죽이도록 하는 오브젝트
     
     private void Awake()
     {
@@ -39,16 +40,14 @@ public class GameManager : MonoBehaviour
 
     public void GameStart()
     {
-        isGameStop = false;
         HP = maxHP;
-
-        // 임시 스크립트(게임 시작 시 플레이어가 근접 무기를 들고 있을 수 있도록 설정)
-        levelUpUI.Select(0);
+        levelUpUI.Select(0);  // 임시 스크립트(게임 시작 시 플레이어가 근접 무기를 들고 있을 수 있도록 설정)
+        GameResume();
     }
 
     private void Update()
     {
-        if (GameManager.instance.isGameStop)
+        if (isGameStop)
             return;
 
         gameTime += Time.deltaTime;
@@ -56,11 +55,15 @@ public class GameManager : MonoBehaviour
         if (gameTime > maxGameTime)
         {
             gameTime = maxGameTime;
+            GameVictory();
         }
     }
 
     public void GetExp()
     {
+        if (isGameStop)
+            return;
+
         exp++;
 
         // 무한 레벨 업을 위해서 인덱스 값을 레벨이 배열 크기보다 크면 배열의 마지막 값을 계속 호출할 수 있도록 하는 것이다.
@@ -96,8 +99,27 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOverRoutine()
     {
+        isGameStop = true;
+
         yield return new WaitForSeconds(0.3f);
+        resultUI.gameObject.SetActive(true);
+        resultUI.GameLose();
         GameStop();
-        resultUI.SetActive(true);
+    }
+
+    public void GameVictory()
+    {
+        StartCoroutine(GameVictoryRoutine());
+    }
+
+    IEnumerator GameVictoryRoutine()
+    {
+        isGameStop = true;
+        enemyCleaner.SetActive(true);
+
+        yield return new WaitForSeconds(0.3f);
+        resultUI.gameObject.SetActive(true);
+        resultUI.GameWin();
+        GameStop();
     }
 }
