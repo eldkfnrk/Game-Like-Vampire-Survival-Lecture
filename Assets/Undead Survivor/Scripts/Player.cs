@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 
     public Scanner scanner;
     public HandControl[] handControls;
+    public RuntimeAnimatorController[] animatorControllers;  // 플레이어 캐릭터의 애니메이터를 저장
 
     Rigidbody2D rigid;
     SpriteRenderer spriteR;
@@ -22,9 +23,11 @@ public class Player : MonoBehaviour
         handControls = GetComponentsInChildren<HandControl>(true);  // 인자 값으로 bool 타입 값을 넣을 수 있는데 이 매개 변수는 비활성화되어 있는 오브젝트도 포함할 것이냐를 선택하는 값이다.(true면 비활성화 오브젝트도 포함 false면 포함x)
     }
 
-    void Update()
+    private void OnEnable()
     {
-
+        moveSpeed *= Character.Speed;
+        // 선택한 캐릭터에 맞는 애니메이터 컨트롤러가 작동하도록 설정
+        animator.runtimeAnimatorController = animatorControllers[GameManager.instance.playerId];
     }
 
     private void LateUpdate()

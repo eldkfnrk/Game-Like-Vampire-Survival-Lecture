@@ -50,14 +50,16 @@ public class Gear : MonoBehaviour
 
         foreach(Weapon weapon in weapons)
         {
-            // 각 레벨에 맞는 연사력 상승률을 적용(중첩이 아닌 개별 값 적용)
+            // 각 레벨에 맞는 연사력(회전 속도) 상승률을 적용(중첩이 아닌 개별 값 적용)
             switch (weapon.weaponId)
             {
                 case 0:  // 근거리 무기
-                    weapon.rotateSpeed = 150f + 150f * rate;  // 근거리 무기의 기본 값이 150
+                    float defalutWeaponSpeed = 150f * Character.WeaponSpeed;
+                    weapon.rotateSpeed = defalutWeaponSpeed + defalutWeaponSpeed * rate;  // 근거리 무기의 기본 값이 150
                     break;
                 default:  // 원거리 무기
-                    weapon.rotateSpeed = 0.6f * (1f - rate); // 근거리 무기의 기본 값이 0.6(원거리 무기는 발사 시간이 짧아져야 성능이 올라가는 것이기 때문에 약간 다른 적용 방법을 사용해야 한다.)
+                    float defaultWeaponRate = 0.6f * Character.WeaponRate;
+                    weapon.rotateSpeed = defaultWeaponRate * (1f - rate); // 근거리 무기의 기본 값이 0.6(원거리 무기는 발사 시간이 짧아져야 성능이 올라가는 것이기 때문에 약간 다른 적용 방법을 사용해야 한다.)
                     break;
             }
         }
@@ -65,7 +67,7 @@ public class Gear : MonoBehaviour
 
     void SpeedUp()
     {
-        float speed = 3f;  // 플레이어의 기본 이동 속력
+        float speed = 3f * Character.Speed;  // 플레이어의 기본 이동 속력
         GameManager.instance.player.moveSpeed += speed * rate;  // 속도 상승 또한 중첩이 아닌 레벨에 대응하는 값 적용
     }
 }

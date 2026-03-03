@@ -50,8 +50,8 @@ public class Weapon : MonoBehaviour
 
         //Property Set
         weaponId = data.itemId;
-        damage = data.baseDamage;
-        count = data.baseCount;
+        damage = data.baseDamage * Character.Damage;
+        count = data.baseCount + Character.Count;
 
         for (int i = 0; i < GameManager.instance.poolManager.prefabs.Length; i++)
         {
@@ -65,11 +65,11 @@ public class Weapon : MonoBehaviour
         switch (weaponId)
         {
             case 0:
-                rotateSpeed = 150f;
+                rotateSpeed = 150f * Character.WeaponSpeed;
                 WeaponPosition();
                 break;
             default:
-                rotateSpeed = 0.6f;
+                rotateSpeed = 0.6f * Character.WeaponRate;
                 break;
         }
 
@@ -130,7 +130,7 @@ public class Weapon : MonoBehaviour
     public void LevelUp(float damage, int count)
     {
         // 데미지는 상승률을 적용한 값을 받고 관통력은 추가 값을 받는 형식
-        this.damage = damage;
+        this.damage = damage * Character.Damage;
         this.count += count;
 
         // 근접 무기의 경우 무기 재배치
