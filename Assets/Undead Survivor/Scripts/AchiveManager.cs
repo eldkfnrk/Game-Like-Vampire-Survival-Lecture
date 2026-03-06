@@ -10,7 +10,7 @@ public class AchiveManager : MonoBehaviour
     public GameObject[] lockCharacter;  // 해금이 안 된 상태의 버튼을 저장할 배열
     public GameObject[] unlockCharacter;  // 해금된 상태의 버튼을 저장할 배열
     public GameObject noticeUI;  // 알림창 UI를 저장할 변수
-    WaitForSecondsRealtime waitTime;  // 기다리는 시간을 저장할 변수(WaitForSeconds는 생성되고 호출되어서 원하는 시간이 지나면 다시 못 사용하지만 WaitForSecondsRealtime은 실시간으로 계산하기 때문에 재활용할 수 있다.)
+    WaitForSecondsRealtime waitTime;  // WaitForSeconds는 Time.timeScale의 영향을 받기 때문에 시간 계산이 멈추거나 빨라진다. 이 게임 내 시간에 영향을 받지 않도록 하기 위해 실시간을 이용하는 WaitForSecondsRealtime을 사용한다.
 
     // 업적의 종류를 열거형으로 저장
     enum Achivement
@@ -99,6 +99,13 @@ public class AchiveManager : MonoBehaviour
             PlayerPrefs.SetInt(achivement.ToString(), 1);
             
             /* UI에 각 상황에 맞는 설명과 이미지를 알맞게 출력되도록 하는 로직을 추가할 예정*/
+            for(int i = 0; i < noticeUI.transform.childCount; i++)
+            {
+                // 이 코드를 사용하기 위해서는 UI의 하이라키 순서도 중요하다.
+                // 하이라키 순서대로 자식 오브젝트의 순서(인덱스)가 결정되기 때문에 열거형으로 정의해놓은 업적 데이터와 알맞는 UI를 출력하기 위해서 하이라키 순서를 맞추는 것은 반드시 필요한 작업이다.
+                bool isCompleteAchive = (i == (int)achivement);
+                noticeUI.transform.GetChild(i).gameObject.SetActive(isCompleteAchive);
+            }
 
             // 업적을 달성해서 캐릭터가 해금되었음을 알리는 UI를 보여줬다가 일정 시간이 지난 후 안 보이도록 설정
             StartCoroutine(NoticeUIRoutine());
