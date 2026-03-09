@@ -90,7 +90,9 @@ public class Enemy : MonoBehaviour
             animator.SetBool("Dead", true);
             GameManager.instance.kill++;
             GameManager.instance.GetExp();
-            //Death();  //애니메이션 이벤트로 직접 하는 것이 아닌 애니메이션이 오브젝트 비활성화를 수행
+
+            if(GameManager.instance.isGameStop)
+                AudioManager.instance.PlaySFX(AudioManager.SFXType.Dead);
         }
     }
 
@@ -100,6 +102,7 @@ public class Enemy : MonoBehaviour
         Vector3 playerPos = GameManager.instance.player.transform.position;
         Vector3 direction = transform.position - playerPos;
         rigid.AddForce(direction.normalized * 0.5f, ForceMode2D.Impulse);
+        AudioManager.instance.PlaySFX(AudioManager.SFXType.Hit0);
     }
 
     void Death()

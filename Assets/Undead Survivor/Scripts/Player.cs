@@ -66,6 +66,7 @@ public class Player : MonoBehaviour
         if (collision.collider.CompareTag("Enemy"))
         {
             GameManager.instance.HP -= Time.deltaTime * 10f;  // 10f는 임시 값이고 실제로는 적이 주는 데미지 값이 들어갈 예정
+            AudioManager.instance.PlaySFX(AudioManager.SFXType.Hit1);
         }
 
         if(GameManager.instance.HP <= 0)

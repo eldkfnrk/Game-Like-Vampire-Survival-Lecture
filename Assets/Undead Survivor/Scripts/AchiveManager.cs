@@ -116,6 +116,7 @@ public class AchiveManager : MonoBehaviour
     IEnumerator NoticeUIRoutine()
     {
         noticeUI.SetActive(true);
+        AudioManager.instance.PlaySFX(AudioManager.SFXType.Melee);
 
         yield return waitTime;  // yield return new WaitForSeconds(3f)는 계속 새로운 WaitForSeconds 객체를 생성해서 사용하기 때문에 메모리적 손해가 발생할 수 있어서 자주 사용될 만한 것들에는 따로 선언을 해주고 난 후 사용하는 것이 좋다.
 

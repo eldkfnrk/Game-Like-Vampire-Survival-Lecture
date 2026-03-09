@@ -125,6 +125,7 @@ public class Weapon : MonoBehaviour
         bullet.parent = transform;
 
         bullet.GetComponent<Bullet>().BulletInit(damage, count, direction);  //count는 근거리 무기에서는 무기 개수였지만 원거리 총알에서는 관통력으로 사용
+        AudioManager.instance.PlaySFX(AudioManager.SFXType.Range);
     }
 
     public void LevelUp(float damage, int count)

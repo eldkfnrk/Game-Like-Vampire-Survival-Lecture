@@ -39,17 +39,6 @@ public class GameManager : MonoBehaviour
         maxHP = 100;
     }
 
-    // 플레이어의 캐릭터 id를 받아서 플레이어 id를 저장
-    public void GameStart(int id)
-    {
-        playerId = id;
-        HP = maxHP;
-
-        // 플레이어는 이제 캐릭터를 선택하기 전에는 보이지 않다가 선택하고 나서는 보이도록 수정
-        player.gameObject.SetActive(true);
-        levelUpUI.Select(playerId % 2);  // 플레이어 캐릭터에 알맞는 무기를 갖고 있도록 설정(혹시라도 플레이어 캐릭터 수보다 무기가 적어서 생기는 문제가 발생하는 것을 막기 위해 나머지 값으로 값을 제한)
-        GameResume();
-    }
 
     private void Update()
     {
@@ -79,6 +68,20 @@ public class GameManager : MonoBehaviour
             exp = 0;
             levelUpUI.Show();
         }
+    }
+
+    // 플레이어의 캐릭터 id를 받아서 플레이어 id를 저장
+    public void GameStart(int id)
+    {
+        playerId = id;
+        HP = maxHP;
+
+        // 플레이어는 이제 캐릭터를 선택하기 전에는 보이지 않다가 선택하고 나서는 보이도록 수정
+        player.gameObject.SetActive(true);
+        levelUpUI.Select(playerId % 2);  // 플레이어 캐릭터에 알맞는 무기를 갖고 있도록 설정(혹시라도 플레이어 캐릭터 수보다 무기가 적어서 생기는 문제가 발생하는 것을 막기 위해 나머지 값으로 값을 제한)
+        GameResume();
+        AudioManager.instance.PlaySFX(AudioManager.SFXType.Select);
+        AudioManager.instance.PlayBGM(true);
     }
 
     public void GameStop()
@@ -111,6 +114,8 @@ public class GameManager : MonoBehaviour
         resultUI.gameObject.SetActive(true);
         resultUI.GameLose();
         GameStop();
+        AudioManager.instance.PlaySFX(AudioManager.SFXType.Lose);
+        AudioManager.instance.PlayBGM(false);
     }
 
     public void GameVictory()
@@ -127,5 +132,7 @@ public class GameManager : MonoBehaviour
         resultUI.gameObject.SetActive(true);
         resultUI.GameWin();
         GameStop();
+        AudioManager.instance.PlaySFX(AudioManager.SFXType.Win);
+        AudioManager.instance.PlayBGM(false);
     }
 }
