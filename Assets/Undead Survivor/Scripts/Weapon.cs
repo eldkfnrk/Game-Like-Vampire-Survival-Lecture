@@ -106,7 +106,7 @@ public class Weapon : MonoBehaviour
             weaponTr.Rotate(rotateVec);
             weaponTr.Translate(weaponTr.up * distance, Space.World);  //자기 자신을 기준으로 위로 이동했으니 씬 내에서는 월드(글로벌)로 반영되어야 한다. 자기 자신을 기준으로 이동하지 않은 상태라면 Space.Self를 이용하면 된다.
 
-            weaponTr.GetComponent<Bullet>().BulletInit(damage, -1);  // -1 is Infinitly per.(-1은 무한으로 관통한다는 의미)
+            weaponTr.GetComponent<Bullet>().BulletInit(damage, -100);  // -100 is Infinitly per.(-100은 무한으로 관통한다는 의미)
         }
     }
 

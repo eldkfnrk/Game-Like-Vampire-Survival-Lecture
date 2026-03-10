@@ -41,7 +41,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Enemy") || per == -1)  //per이 -1이라는 것은 무한 관통이라는 뜻이고 이는 근접 무기임을 의미
+        if (!collision.CompareTag("Enemy") || per == -100)  //per이 -100이라는 것은 무한 관통이라는 뜻이고 이는 근접 무기임을 의미
             return;
 
         per--;  //적을 맞추면서 관통력 하락

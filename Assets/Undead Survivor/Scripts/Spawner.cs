@@ -6,12 +6,15 @@ public class Spawner : MonoBehaviour
     Transform[] spawnPoint;
     public SpawnData[] spawnDatas;
 
+    float levelTimer;  // 스폰되는 몬스터의 레벨을 올리는 시간을 저장하는 변수
+
     float timer;
     int level;
 
     private void Awake()
     {
         spawnPoint = GetComponentsInChildren<Transform>();  //자기 자신도 해당 컴포넌트를 가지면 0번 인덱스에 저장 그 후 자식 컴포넌트를 순서대로 저장
+        levelTimer = GameManager.instance.maxGameTime / spawnDatas.Length;  // 최대 시간에서 몬스터의 종류를 나눈 값을 저장
     }
 
     void Update()
@@ -20,7 +23,7 @@ public class Spawner : MonoBehaviour
             return;
 
         timer += Time.deltaTime;
-        level = Mathf.Min(Mathf.FloorToInt(GameManager.instance.gameTime / 60f), spawnDatas.Length - 1);
+        level = Mathf.Min(Mathf.FloorToInt(GameManager.instance.gameTime / levelTimer), spawnDatas.Length - 1);
 
         if (timer > spawnDatas[level].spawnTime)
         {
