@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public Player player;
     public LevelUp levelUpUI;
     public Result resultUI;
+    public Transform joyStickUI;
     public GameObject enemyCleaner;  // 게임 시간이 지나 승리하게 되면 모든 적을 죽이도록 하는 오브젝트
     
     private void Awake()
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
         isGameStop = true;
         maxGameTime *= 60f;
         maxHP = 100;
+        Application.targetFrameRate = 60;  // 타켓 프레임을 60으로 지정 - 이 프레임을 유지하라고 직접 명령하는 것(이걸 하지 않으면 모바일 환경에서 30프레임으로 떨어질 수도 있다.)
     }
 
 
@@ -88,12 +90,14 @@ public class GameManager : MonoBehaviour
     {
         isGameStop = true;
         Time.timeScale = 0f;
+        joyStickUI.localScale = Vector3.zero;
     }
 
     public void GameResume()
     {
         isGameStop = false;
         Time.timeScale = 1f;
+        joyStickUI.localScale = new Vector3(2, 2, 2);
     }
 
     public void GameRetry()
@@ -134,5 +138,11 @@ public class GameManager : MonoBehaviour
         GameStop();
         AudioManager.instance.PlaySFX(AudioManager.SFXType.Win);
         AudioManager.instance.PlayBGM(false);
+    }
+
+    public void GameQuit()
+    {
+        Application.Quit();
+        Debug.Log("Quit Success");
     }
 }

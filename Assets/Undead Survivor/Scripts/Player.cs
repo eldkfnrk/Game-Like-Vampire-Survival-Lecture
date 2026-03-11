@@ -56,6 +56,8 @@ public class Player : MonoBehaviour
     void OnMove(InputValue value)
     {
         inputVec = value.Get<Vector2>();
+        string currentDevice = GetComponent<PlayerInput>().currentControlScheme;
+        Debug.Log(currentDevice);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
